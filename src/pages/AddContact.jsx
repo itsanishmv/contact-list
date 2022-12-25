@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 function AddContact() {
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
@@ -19,11 +20,15 @@ function AddContact() {
     }
   }, [data]);
   const handleSave = () => {
-    setData([...data, { name, phone, type, isWhatsapp, profilePic }]);
+    setData([
+      ...data,
+      { id: uuidv4(), name, phone, type, isWhatsapp, profilePic },
+    ]);
 
     localStorage.setItem("contacts", JSON.stringify(data));
-    console.log(typeof data);
-    // navigate("/");
+    // if (data.length !== 0) {
+    //   navigate("/");
+    // }
   };
 
   // const disabled = !name || !phone || !type;
@@ -86,6 +91,13 @@ function AddContact() {
         className="mt-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
       >
         Save
+      </button>
+      <button
+        onClick={() => navigate("/")}
+        type="button"
+        className="mt-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+      >
+        View list
       </button>
     </div>
   );
