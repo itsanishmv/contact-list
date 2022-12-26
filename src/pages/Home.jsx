@@ -9,10 +9,13 @@ function Home() {
   const [list, setList] = useState([]);
 
   const navigate = useNavigate();
+  const getLocalStorageData = JSON.parse(localStorage.getItem("contacts"));
   useEffect(() => {
-    if (localStorage.getItem("contacts")) {
+    console.log("render");
+    const getLocalStorageData = JSON.parse(localStorage.getItem("contacts"));
+    if (getLocalStorageData.length !== 0) {
       setList(
-        JSON.parse(localStorage.getItem("contacts"))?.sort(function (a, b) {
+        getLocalStorageData?.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
           }
@@ -27,7 +30,7 @@ function Home() {
     } else {
       setIsEmpty(true);
     }
-  }, []);
+  }, [getLocalStorageData?.length]);
 
   const handleDelete = (id) => {
     const List = list.filter((el) => {
@@ -38,15 +41,18 @@ function Home() {
   };
 
   return (
-    <div className=" flex pt-16 gap-4 items-center flex-col w-full border-2 h-[100vh]">
+    <div className=" flex pt-16 gap-4 items-center flex-col  h-[100vh]">
       <h1 className=" font-bold text-5xl">Contact List</h1>
       {isEmpty && <NoContacts message="Sorry , there is no Contact saved" />}
-      {list?.map((el) => (
-        <Suspense fallback={<div>Skeleton...</div>}>
-          <Contact key={el.id} details={el} Delete={handleDelete} />
-        </Suspense>
-      ))}
-      {localStorage.getItem("contacts") && (
+      <div className="w-full flex h-1/2 overflow-y-scroll flex-col items-center">
+        {list?.map((el) => (
+          <Suspense fallback={<div>Skeleton...</div>}>
+            <Contact key={el.id} details={el} Delete={handleDelete} />
+          </Suspense>
+        ))}
+      </div>
+
+      {getLocalStorageData.length !== 0 && (
         <button
           onClick={() => navigate("/add-contact")}
           type="button"

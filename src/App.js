@@ -7,7 +7,7 @@ import EditContact from "./pages/EditContact";
 
 function App() {
   return (
-    <div className=" h-[100vh]  ">
+    <div className=" h-[100vh] ">
       {/* //369 */}
       <Routes>
         <Route path="/" element={<Home />} />

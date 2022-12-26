@@ -6,7 +6,7 @@ function AddContact() {
   const [phone, setPhone] = useState();
   const [type, setType] = useState("Personal");
   const [isWhatsapp, setIsWhatsapp] = useState(false);
-  const [profilePic, setProfilePic] = useState("img url");
+  const [profilePic, setProfilePic] = useState("");
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,7 +47,7 @@ function AddContact() {
           value={phone}
           name="phone"
           className="inputBox p-4"
-          type="text"
+          type="number"
           placeholder="phone"
         />
         <div class="relative">
@@ -59,12 +59,12 @@ function AddContact() {
             id="grid-state"
           >
             {/* <option disabled={true}>Choose one </option> */}
-            <option selected>Personal</option>
+            <option>Personal</option>
             <option>Office</option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg
-              class="fill-current h-4 w-4"
+              className="fill-current h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
@@ -72,6 +72,14 @@ function AddContact() {
             </svg>
           </div>
         </div>
+        <input
+          onChange={(e) => setProfilePic(e.target.value)}
+          value={profilePic}
+          name="profile pic"
+          className="inputBox p-4"
+          type="text"
+          placeholder="image url"
+        />
         <div className="flex items-center justify-center">
           <span>Whatsapp</span>
           <input
@@ -82,6 +90,7 @@ function AddContact() {
           />
         </div>
       </div>
+
       <button
         disabled={isEmpty}
         onClick={() => handleSave()}

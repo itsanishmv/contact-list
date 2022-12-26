@@ -7,7 +7,7 @@ function Contact({ details, Delete }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className=" border-2 w-1/3  rounded-3xl flex gap-4 justify-between items-center p-4 box-border shadow-lg">
+    <div className="md:w-1/3 w-[90%]  rounded-3xl flex gap-4 justify-between items-center p-4 box-border shadow-lg">
       {isOpen && (
         <ConfirmationModal
           Delete={() => Delete(details.id)}
@@ -15,11 +15,17 @@ function Contact({ details, Delete }) {
         />
       )}
       <div className=" flex items-center gap-2">
-        <img className=" h-16 w-16 rounded-full border-2" src="" alt="avatar" />
+        <img
+          className=" h-16 w-16 rounded-full border-2 object-cover"
+          src={details?.profilePic}
+          alt="avatar"
+        />
         <div className="flex flex-col gap-1">
           <div className="flex gap-2 items-center">
-            <h3 className=" text-lg font-semibold">{details?.name}</h3>
-            <span className="border-2 p-1 box-border rounded-xl bg-yellow-200    text-xs">
+            <h3 className=" text-lg font-semibold capitalize">
+              {details?.name}
+            </h3>
+            <span className=" p-2 box-border rounded-xl bg-yellow-200  shadow-lg font-medium text-xs">
               {details?.type}
             </span>
           </div>
@@ -30,7 +36,7 @@ function Contact({ details, Delete }) {
       <div className=" flex">
         <button onClick={() => navigate(`/edit-contact/${details.id}`)}>
           <img
-            className=" rounded-full  hover:shadow-xl"
+            className=" rounded-full h-10 w-10  hover:shadow-xl"
             clsa
             src={EDIT_ICON}
             alt="edit_icon"
@@ -39,7 +45,7 @@ function Contact({ details, Delete }) {
         <button onClick={() => setIsOpen(true)}>
           {" "}
           <img
-            className=" rounded-full  hover:shadow-xl"
+            className=" rounded-full h-10 w-10 hover:shadow-xl"
             src={DELETE_ICON}
             alt="delete"
           />
