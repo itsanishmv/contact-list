@@ -26,12 +26,9 @@ function AddContact() {
     ]);
 
     localStorage.setItem("contacts", JSON.stringify(data));
-    // if (data.length !== 0) {
-    //   navigate("/");
-    // }
   };
 
-  // const disabled = !name || !phone || !type;
+  const isEmpty = !name || !phone || !type;
   return (
     <div className=" flex pt-16 items-center flex-col w-full  h-[100vh]">
       <h1 className=" font-bold text-5xl">Add Contact</h1>
@@ -86,9 +83,15 @@ function AddContact() {
         </div>
       </div>
       <button
+        disabled={isEmpty}
         onClick={() => handleSave()}
         type="button"
-        className="mt-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+        className={`mt-4 ${
+          isEmpty && " bg-slate-300"
+        } text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 ${
+          !isEmpty &&
+          "dark:hover:text-white  dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+        }`}
       >
         Save
       </button>
