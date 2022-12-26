@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import AddContact from "./pages/AddContact";
 import NotFound from "./components/NotFound";
+import EditContact from "./pages/EditContact";
+
 function App() {
   return (
     <div className=" h-[100vh]  ">
@@ -10,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-contact" element={<AddContact />} />
-        <Route path="/edit-contact/:id" element={<AddContact />} />
+        <Route path="/edit-contact/:id" element={<EditContact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
