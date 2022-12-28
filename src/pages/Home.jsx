@@ -11,7 +11,6 @@ function Home() {
   const navigate = useNavigate();
   const getLocalStorageData = JSON.parse(localStorage.getItem("contacts"));
   useEffect(() => {
-    console.log("render");
     const getLocalStorageData = JSON.parse(localStorage.getItem("contacts"));
     if (getLocalStorageData?.length !== 0) {
       setList(

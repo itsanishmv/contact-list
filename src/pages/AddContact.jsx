@@ -1,53 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { Storage } from "../FirebaseConfig";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import SPINNER from "../Assets/spinner.svg";
+import useAddContact from "../hooks/useAddContact";
 function AddContact() {
-  const [name, setName] = useState();
-  const [phone, setPhone] = useState();
-  const [type, setType] = useState("Personal");
-  const [isWhatsapp, setIsWhatsapp] = useState(false);
-  const [image, setImage] = useState();
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("contacts") !== null) {
-      setData(JSON.parse(localStorage.getItem("contacts")));
-    }
-  }, []);
-  useEffect(() => {
-    if (data.length !== 0) {
-      localStorage.setItem("contacts", JSON.stringify(data));
-    }
-  }, [data]);
-  const handleSave = () => {
-    setLoading(true);
-    const imageRef = ref(Storage, `/image${image.name + uuidv4()}`);
-    uploadBytes(imageRef, image).then((res) => {
-      getDownloadURL(imageRef, res.metadata.fullPath).then((url) => {
-        setData([
-          ...data,
-          { id: uuidv4(), name, phone, type, isWhatsapp, profilePic: url },
-        ]);
-        console.log("uploaded");
-        setLoading(false);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      });
-    });
-
-    localStorage.setItem("contacts", JSON.stringify(data));
-  };
+  const {
+    name,
+    phone,
+    type,
+    image,
+    setName,
+    setPhone,
+    setImage,
+    setIsWhatsapp,
+    setType,
+    isWhatsapp,
+    loading,
+    handleSave,
+  } = useAddContact();
 
   const isEmpty = !name || !phone || !type || !image;
   return (
     <div className=" flex pt-16 items-center flex-col w-full  h-[100vh]">
       <h1 className=" font-bold text-5xl">Add Contact</h1>
-      <div className="flex flex-col mt-10 justify-center  rounded-sm gap-2 w-1/2">
+      <div className="flex flex-col mt-10 justify-center  rounded-sm gap-2 w-2/3">
         <input
           onChange={(e) => setName(e.target.value)}
           value={name}
@@ -109,10 +85,9 @@ function AddContact() {
                 ></path>
               </svg>
               <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span class="font-semibold">Click to upload</span> or drag and
-                drop
+                <span class="font-semibold">Click to upload</span>
               </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
+              <p class="text-xs text-gray-500 text-center">
                 SVG, PNG, JPG or GIF (MAX. 800x400px)
               </p>
             </div>
@@ -130,7 +105,7 @@ function AddContact() {
             />
           </label>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center gap-2 justify-center">
           <span>Whatsapp</span>
           <input
             onChange={(e) => setIsWhatsapp(!isWhatsapp)}
@@ -140,24 +115,31 @@ function AddContact() {
           />
         </div>
       </div>
-
-      <button
-        disabled={isEmpty}
-        onClick={() => handleSave()}
-        type="button"
-        className={`mt-4 ${
-          isEmpty && " bg-slate-300"
-        } text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 ${
-          !isEmpty &&
-          "dark:hover:text-white  dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-        }`}
-      >
-        {loading ? (
-          <img className="  h-5 w-5 " src={SPINNER} alt="spinner" />
-        ) : (
-          "Save"
-        )}
-      </button>
+      <div>
+        <button
+          disabled={isEmpty}
+          onClick={() => handleSave()}
+          type="button"
+          className={`mt-4 ${
+            isEmpty && " bg-slate-300"
+          } text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 ${
+            isEmpty &&
+            "dark:hover:text-white  dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+          }`}
+        >
+          {loading ? (
+            <img className="  h-5 w-5 " src={SPINNER} alt="spinner" />
+          ) : (
+            "Save"
+          )}
+        </button>
+        <button
+          onClick={() => navigate("/")}
+          className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
