@@ -12,7 +12,7 @@ This is a web app that stores data on the local storage of your browser so that 
 - Lists the created contacts on the homepage (list is displayed in alphabetical order by name)
 - Update the selected contact
 - Delete a particular contact (asks for the confirmation before deleting the contact straight away)
--
+- Upload photo on firebase storage 
 
 ## Installation
 
