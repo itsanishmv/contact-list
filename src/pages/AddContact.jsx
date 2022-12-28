@@ -23,7 +23,7 @@ function AddContact() {
   return (
     <div className=" flex pt-16 items-center flex-col w-full  h-[100vh]">
       <h1 className=" font-bold text-5xl">Add Contact</h1>
-      <div className="flex flex-col mt-10 justify-center  rounded-sm gap-2 w-2/3">
+      <div className="flex flex-col mt-10 justify-center  rounded-sm gap-2 md:w-1/2 w-2/3">
         <input
           onChange={(e) => setName(e.target.value)}
           value={name}

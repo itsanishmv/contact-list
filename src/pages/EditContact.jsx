@@ -21,7 +21,7 @@ function EditContact() {
 
   return (
     <div className=" border-2 flex justify-center h-[100vh]">
-      <div className="flex flex-col items-center w-2/3  pt-16 gap-4 ">
+      <div className="flex flex-col items-center md:w-1/2 w-2/3  pt-16 gap-4 ">
         <h2 className=" font-bold text-4xl">Edit contact </h2>
         <input
           onChange={(e) => setName(e.target.value)}
@@ -69,8 +69,7 @@ function EditContact() {
                 ></path>
               </svg>
               <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span class="font-semibold">Click to upload</span> or drag and
-                drop
+                <span class="font-semibold">Click to upload</span>
               </p>
               <p class="text-xs text-gray-500 dark:text-gray-400">
                 SVG, PNG, JPG or GIF (MAX. 800x400px)
