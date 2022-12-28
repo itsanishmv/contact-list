@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     console.log("render");
     const getLocalStorageData = JSON.parse(localStorage.getItem("contacts"));
-    if (getLocalStorageData.length !== 0) {
+    if (getLocalStorageData?.length !== 0) {
       setList(
         getLocalStorageData?.sort((a, b) => {
           if (a.name < b.name) {
@@ -52,7 +52,7 @@ function Home() {
         ))}
       </div>
 
-      {getLocalStorageData.length !== 0 && (
+      {getLocalStorageData?.length !== 0 && (
         <button
           onClick={() => navigate("/add-contact")}
           type="button"
