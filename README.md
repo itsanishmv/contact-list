@@ -1,6 +1,6 @@
 # Contact-List 📳
 
-A simple web app to maintain a contact list on yuor local storage of the browser
+A simple web app to maintain a contact list on your local storage of the browser
 
 ## About
 
