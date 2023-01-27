@@ -26,4 +26,4 @@ To run the app in local machine :-
 
 ## Tech Stack
 
-React js , tailwind css
+React js , tailwind css , firebase storage 
