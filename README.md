@@ -1,6 +1,6 @@
 # Contact-List 📳
 
-A simple web app to maintain a contact list on yuor local storage of the browser
+A simple web app to maintain a contact list on your local storage of the browser
 
 ## About
 
@@ -26,4 +26,4 @@ To run the app in local machine :-
 
 ## Tech Stack
 
-React js , tailwind css
+React js , tailwind css , firebase storage 
